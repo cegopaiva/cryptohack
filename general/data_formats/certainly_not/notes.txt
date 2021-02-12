@@ -1,0 +1,1 @@
+openssl asn1parse -inform DER -in 2048b-rsa-example-cert.der -strparse 312
