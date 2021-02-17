@@ -14,7 +14,7 @@ def matrix2bytes(matrix):
     return arr
 
 def pro_matrix2bytes(matrix):
-    """ Converts a 4x4 matrix into a 16-byte array.  """
+    """ Converts a 4x4 matrix into a 16-byte array. (Robin Jadoul) """
     return bytes(sum(matrix, []))
 
 matrix = [
