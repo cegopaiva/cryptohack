@@ -13,6 +13,10 @@ def matrix2bytes(matrix):
             arr.append(m[j])
     return arr
 
+def pro_matrix2bytes(matrix):
+    """ Converts a 4x4 matrix into a 16-byte array.  """
+    return bytes(sum(matrix, []))
+
 matrix = [
     [99, 114, 121, 112],
     [116, 111, 123, 105],
@@ -26,3 +30,7 @@ print(bytes2matrix([1, 2, 3, 4, 5, 6, 7, 8]))
 # Retrieve flag with own implementation
 flag = matrix2bytes(matrix)
 print("".join([chr(f) for f in flag]))
+
+# Retrieve flag with pro implementation
+flag = pro_matrix2bytes(matrix)
+print(flag.decode("utf-8"))
