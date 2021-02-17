@@ -4,7 +4,14 @@ def bytes2matrix(text):
 
 def matrix2bytes(matrix):
     """ Converts a 4x4 matrix into a 16-byte array.  """
-    ????
+    arr = []
+
+    # O(n^2) traverse through the 4x4 matrix and construct the array.
+    for i in range(0, len(matrix)):
+        m = matrix[i]
+        for j in range(0, len(m)):
+            arr.append(m[j])
+    return arr
 
 matrix = [
     [99, 114, 121, 112],
@@ -13,4 +20,9 @@ matrix = [
     [114, 105, 120, 125],
 ]
 
-print(matrix2bytes(matrix))
+# Testing out the nature of the function
+print(bytes2matrix([1, 2, 3, 4, 5, 6, 7, 8]))
+
+# Retrieve flag with own implementation
+flag = matrix2bytes(matrix)
+print("".join([chr(f) for f in flag]))
