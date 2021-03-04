@@ -43,10 +43,31 @@ state = [
     [64, 80, 182, 255],
 ]
 
+def sub_bytes(state, sbox=s_box):
+    """ Perform substition step to 4x4 matrix. Return back as substituted 4x4 matrix. """
+    sub_matrix = []
+    for state_row in range(len(state)):
+        sub_row = []
+        for state_col in range(len(state[state_row])):
+            # Converts state integer value to a hex string
+            val = hex(state[state_row][state_col])
 
-def sub_bytes(s, sbox=s_box):
-    ???
+            # Example: 0xab
+            #   a (left-most 4 bit val) => sbox row 
+            #   b (right-most 4 bit val) => sbox col
+            s_row, s_col = int(val[2], 16), int(val[3], 16)
 
+            # Append lookup value from sbox after computing the index
+            sbox_val = sbox[16 * s_row + s_col]
+            sub_row.append(sbox_val)
+        sub_matrix.append(sub_row)
+    return sub_matrix
 
-print(sub_bytes(state, sbox=inv_s_box))
+def pro_matrix2bytes(matrix):
+    """ Converts a 4x4 matrix into a 16-byte array. (Robin Jadoul) """
+    return bytes(sum(matrix, []))
+
+sub_matrix = sub_bytes(state, sbox=inv_s_box)
+flag = pro_matrix2bytes(sub_matrix)
+print(flag.decode("utf-8"))
 
